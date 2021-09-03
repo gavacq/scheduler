@@ -37,8 +37,6 @@ export default function Application() {
     day
   });
 
-  // 69 420   xoxooxox
-
   return (
     <main className="layout">
 
