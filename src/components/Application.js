@@ -53,16 +53,31 @@ const appointments = [
 ];
 
 export default function Application() {
-  const [day, setDay] = useState("Monday");
-  const [days, setDays] = useState([]);
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
 
-  console.log("days:", days);
+  console.log("state", state);
+
+  const setDays = days => {
+    setState(prev => ({
+      ...prev,
+      days
+    }));
+  };
 
   useEffect(() => {
     axios.get("/api/days")
       .then(res => setDays(res.data))
       .catch(res => console.log("Error:", res.message));
   }, []);
+
+  const setDay = day => setState({
+    ...state,
+    day
+  });
 
   return (
     <main className="layout">
@@ -77,8 +92,8 @@ export default function Application() {
         <nav className="sidebar__menu">
           <DayList
             // /CREATE PROPS and pass them to DayList
-            day={day}
-            days={days}
+            day={state.day}
+            days={state.days}
             setDay={setDay}
           />
         </nav>
