@@ -6,53 +6,6 @@ import Appointment from "components/Appointment";
 import { getAppointmentsForDay } from "helpers/selectors";
 import "./Application.scss";
 
-// const appointments = [
-//   {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   {
-//     id: 3,
-//     time: "2pm",
-//     interview: {
-//       student: "Bob Thomas",
-//       interviewer: {
-//         id: 2,
-//         name: "Tori Malcolm",
-//         avatar: "https://i.imgur.com/Nmx0Qxo.png"
-//       }
-//     }
-//   },
-//   {
-//     id: 4,
-//     time: "4pm",
-//   },
-//   {
-//     id: 5,
-//     time: "4:30pm",
-//     interview: {
-//       student: "Gary Jipp",
-//       interviewer: {
-//         id: 5,
-//         name: "Sven Jones",
-//         avatar: "https://i.imgur.com/twYrpay.jpg"
-//       }
-//     }
-//   }
-// ];
-
 export default function Application() {
   const [state, setState] = useState({
     day: "Monday",
@@ -62,13 +15,6 @@ export default function Application() {
 
   console.log("state", state);
   
-  // setState({
-  //   ...state,
-  //   days: res[0].data,
-  //   appointments: res[1].data
-  // });
-  // setState(counter + 1)
-
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
