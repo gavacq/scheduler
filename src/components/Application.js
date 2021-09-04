@@ -66,10 +66,7 @@ export default function Application() {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
-          console.log("appointment", appointment);
-
           const interview = getInterview(state, appointment.interview);
-          console.log("interview", interview);
           
           return (
             <Appointment
