@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import {getAppointmentsForDay, getInterview} from "helpers/selectors";
 import "./Application.scss";
 
 export default function Application() {
@@ -73,7 +73,8 @@ export default function Application() {
               key={appointment.id}
               id={appointment.id}
               time={appointment.time}
-              interview={interview} />
+              interview={interview}
+              interviewers={interviewers} />
           );
         })}
 
