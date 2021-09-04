@@ -3,7 +3,7 @@ import axios from "axios";
 
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
-import {getAppointmentsForDay, getInterview} from "helpers/selectors";
+import {getAppointmentsForDay, getInterview, getInterviewersForDay} from "helpers/selectors";
 import "./Application.scss";
 
 export default function Application() {
@@ -74,7 +74,7 @@ export default function Application() {
               id={appointment.id}
               time={appointment.time}
               interview={interview}
-              interviewers={interviewers} />
+              interviewers={getInterviewersForDay(state, state.day)} />
           );
         })}
 
