@@ -1,7 +1,7 @@
 {
   "extends": [
-    "react-app",
-    "/home/gaa/lighthouse/.eslintrc.json"
+    "/home/gaa/lighthouse/.eslintrc.json",
+    "react-app"
   ],
   "parser": "babel-eslint"
 }
