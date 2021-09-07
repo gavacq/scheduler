@@ -1,6 +1,9 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 
+const MAXSPOTS = 5;
+const MINSPOTS = 0;
+
 const useApplicationData = () => {
   const [state, setState] = useState({
     day: "Monday",
@@ -9,24 +12,50 @@ const useApplicationData = () => {
     interviewers: {}
   });
 
-  const setDay = day => setState({
-    ...state,
-    day
+  const updateSpots = (apptId, change) => {
+    const apptDay = Math.floor((apptId - 1) / 5);
+
+    return setState(prev => {
+      return {
+        ...prev,
+        days: [
+          ...prev.days.map(day => {
+            if (day.id - 1 === apptDay) {
+              const newSpots = day.spots + change;
+            
+              return {
+                ...day,
+                spots: (newSpots <= MAXSPOTS && newSpots >= MINSPOTS) ? newSpots : day.spots
+              };
+            }
+
+            return day;
+          })
+        ]
+      };
+    });
+  };
+
+  const setDay = day => setState(prev => {
+    return {
+      ...prev,
+      day
+    };
   });
 
-  const bookInterview = (id, interview) => {
+  const bookInterview = (apptId, interview) => {
     const appointment = {
-      ...state.appointments[id],
+      ...state.appointments[apptId],
       interview: {...interview}
     };
 
     const appointments = {
       ...state.appointments,
-      [id]: appointment
+      [apptId]: appointment
     };
 
     return axios.put(
-      `/api/appointments/${id}`,
+      `/api/appointments/${apptId}`,
       {interview}
     ).then(() => {
       setState(prev => {
@@ -35,6 +64,7 @@ const useApplicationData = () => {
           appointments
         };
       });
+      updateSpots(apptId, -1);
     });
   };
 
@@ -56,6 +86,7 @@ const useApplicationData = () => {
           }
         };
       });
+      updateSpots(apptId, 1);
     });
   };
 
