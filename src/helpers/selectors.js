@@ -1,6 +1,8 @@
 const getAppointmentsForDay = (state, dayName) => {
   const appts = [];
 
+  console.log("getAppointmentsForDay", state);
+
   state.days.forEach(day => {
     if (day.name === dayName) {
       day.appointments.forEach(appt => appts.push(state.appointments[appt]));
@@ -26,6 +28,9 @@ const getInterview = (state, interview) => {
   if (!interview) {
     return null;
   }
+
+  console.log("getInterview state interviewers", state.interviewers);
+  console.log("getInterview interview", interview);
 
   return {
     student: interview.student,

@@ -30,17 +30,17 @@ export default function Application() {
       [id]: appointment
     };
 
-    setState(prev => {
-      return {
-        ...prev,
-        appointments
-      };
-    });
-
     return axios.put(
       `/api/appointments/${id}`,
       {interview}
-    );
+    ).then(() => {
+      setState(prev => {
+        return {
+          ...prev,
+          appointments
+        };
+      });
+    });
   };
 
   const deleteInterview = apptId => {
@@ -49,21 +49,19 @@ export default function Application() {
       interview: null
     };
 
-    console.log("appt", appointment);
-
-    setState(prev => {
-      return {
-        ...prev,
-        appointments: {
-          ...prev.appointments,
-          [apptId]: appointment
-        }
-      };
+    return axios.delete(
+      `/api/appointments/${apptId}`
+    ).then(() => {
+      setState(prev => {
+        return {
+          ...prev,
+          appointments: {
+            ...prev.appointments,
+            [apptId]: appointment
+          }
+        };
+      });
     });
-
-    // return axios.delete(
-    //   `/api/appointments/${apptId}`
-    // );
   };
 
   console.log("state", state);
@@ -113,7 +111,11 @@ export default function Application() {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
+          console.log("map", appointment);
+          
           const interview = getInterview(state, appointment.interview);
+
+          console.log("interview", interview);
 
           return (
             <Appointment

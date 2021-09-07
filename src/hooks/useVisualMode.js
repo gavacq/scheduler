@@ -5,6 +5,8 @@ const useVisualMode = (initial) => {
   const [history, setHistory] = useState([initial]);
 
   const transition = (newMode, replace = false) => {
+    console.log("transition", history);
+
     setMode(newMode);
     if (replace) {
       setHistory(prev => [...prev.slice(0, -1), newMode]);
@@ -14,6 +16,8 @@ const useVisualMode = (initial) => {
   };
 
   const back = () => {
+    console.log("back", history);
+
     setMode(prev => {
       if (prev !== "FIRST") {
         return history[history.length - 2];
