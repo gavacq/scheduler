@@ -83,7 +83,25 @@ export default function Application() {
     }).catch(res => console.log("Error:", res.message));
   }, []);
 
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day).map(appointment => {
+    console.log("map", appointment);
+          
+    const interview = getInterview(state, appointment.interview);
+
+    console.log("interview", interview);
+
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+        interviewers={getInterviewersForDay(state, state.day)}
+        bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
+      />
+    );
+  });
 
   return (
     <main className="layout">
@@ -110,25 +128,7 @@ export default function Application() {
         />
       </section>
       <section className="schedule">
-        {dailyAppointments.map(appointment => {
-          console.log("map", appointment);
-          
-          const interview = getInterview(state, appointment.interview);
-
-          console.log("interview", interview);
-
-          return (
-            <Appointment
-              key={appointment.id}
-              id={appointment.id}
-              time={appointment.time}
-              interview={interview}
-              interviewers={getInterviewersForDay(state, state.day)}
-              bookInterview={bookInterview}
-              deleteInterview={deleteInterview}
-            />
-          );
-        })}
+        {dailyAppointments}
 
         {/* the appointment below is a fake and is not rendered. It is just used to
         display the end of the day without any interviews */}
