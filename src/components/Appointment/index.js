@@ -18,18 +18,11 @@ const DELETING = "DELETING";
 const CONFIRM_DELETE = "CONFIRM_DELETE";
 const ERROR_DELETE = "ERROR_DELETE";
 const ERROR_SAVE = "ERROR_SAVE";
-const ERROR_INPUT = "ERROR_INPUT";
 
 export default function Appointment(props) {
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
   const saveInterview = (name, interviewer) => {
-    if (!name || !interviewer) {
-      transition(ERROR_INPUT);
-      
-      return;
-    }
-
     const interview = {
       student: name,
       interviewer: interviewer.id
@@ -111,13 +104,6 @@ export default function Appointment(props) {
           onClose={() => back()}
         />
       )}
-      {mode === ERROR_INPUT && (
-        <Error
-          message={"Invalid name or interviewer."}
-          onClose={() => back()}
-        />
-      )}
     </article>
-
   );
 }
