@@ -57,13 +57,31 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-  it("calls onSave function when the name is defined", () => {
+  it("validates that an interviewer is selected when a name has been entered", () => {
+  /* 1. Create the mock onSave function */
+    const onSave = jest.fn();
+
+    const {getByText} = render(<Form
+      interviewers={interviewers}
+      onSave={onSave}
+      name="Lydia Miller-Jones"
+    />);
+
+    /* 3. Click the save button */
+    fireEvent.click(getByText("Save"));
+
+    expect(getByText(/an interviewer must be selected/i)).toBeInTheDocument();
+    expect(onSave).not.toHaveBeenCalled();
+  });
+
+  it("calls onSave function when the name and interviewer are defined", () => {
   /* 1. Create the mock onSave function */
     const onSave = jest.fn();
 
     /* 2. Render the Form with interviewers, name and the onSave mock function passed as an onSave prop */
     const {queryByText} = render(<Form
       interviewers={interviewers}
+      interviewer={interviewers[0]}
       name="Lydia Miller-Jones"
       onSave={onSave}
     />);
@@ -72,7 +90,8 @@ describe("Form", () => {
     fireEvent.click(queryByText("Save"));
 
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
+    expect(queryByText(/an interviewer must be selected/i)).toBeNull();
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", interviewers[0]);
   });
 });
