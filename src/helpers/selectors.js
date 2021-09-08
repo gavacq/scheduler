@@ -50,19 +50,24 @@ const countEmptySpotsForDay = (appts, day) => {
   return emptySpots;
 };
 
-const updateSpots = function(state, appointments, change) {
+const updateSpots = function(state, appointments) {
   // deep copy days array
-  const days = state.days.map(day => {
-    return {...day};
-  });
+  // const days = state.days.map(day => {
+  //   return {...day};
+  // });
+  const days = {...state.days};
 
   // find the current day
-  const curDay = days.find(day => day.name === state.day);
+  const day = days.filter(day => day.name === state.day);
 
   // calculate new spots
+  day.spots = countEmptySpotsForDay(appointments, day);
+  console.log("new day", day);
+  
   // update the day.spots
   // update days array
-  curDay.spots = countEmptySpotsForDay(appointments, curDay);
+  days.splice(day.id - 1, 1, day);
+  console.log("spliced days", days);
 
   // return days array
   return days;
