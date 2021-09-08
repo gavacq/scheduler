@@ -28,7 +28,7 @@ export default function Appointment(props) {
     console.log("name", name);
     console.log("interviewer", interviewer);
     if (!name || !interviewer) {
-      transition(ERROR_INPUT, true);
+      transition(ERROR_INPUT);
       
       return;
     }
