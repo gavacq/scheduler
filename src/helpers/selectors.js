@@ -38,21 +38,19 @@ const getInterview = (state, interview) => {
   };
 };
 
-const countBookingsForDay = (appts, day) => {
-  let bookings = 0;
+const countEmptySpotsForDay = (appts, day) => {
+  let emptySpots = 0;
 
   for (const appt of day.appointments) {
-    if (appts[appt].interview !== null) {
-      bookings++;
+    if (appts[appt].interview === null) {
+      emptySpots++;
     }
   }
 
-  return bookings;
+  return emptySpots;
 };
 
 const updateSpots = function(state, appointments, change) {
-  const MAXSPOTS = 5;
-
   // deep copy days array
   const days = state.days.map(day => {
     return {...day};
@@ -64,10 +62,10 @@ const updateSpots = function(state, appointments, change) {
   // calculate new spots
   // update the day.spots
   // update days array
-  curDay.spots = MAXSPOTS - countBookingsForDay(appointments, curDay);
+  curDay.spots = countEmptySpotsForDay(appointments, curDay);
 
   // return days array
   return days;
 };
 
-export {getAppointmentsForDay, getInterviewersForDay, getInterview, countBookingsForDay, updateSpots};
+export {getAppointmentsForDay, getInterviewersForDay, getInterview, updateSpots};
