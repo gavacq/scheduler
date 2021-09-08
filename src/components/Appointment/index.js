@@ -24,9 +24,6 @@ export default function Appointment(props) {
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
   const saveInterview = (name, interviewer) => {
-    console.log("saving");
-    console.log("name", name);
-    console.log("interviewer", interviewer);
     if (!name || !interviewer) {
       transition(ERROR_INPUT);
       
