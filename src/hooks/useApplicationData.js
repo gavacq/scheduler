@@ -69,8 +69,6 @@ const useApplicationData = () => {
     });
   };
 
-  console.log("state", state);
-
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
