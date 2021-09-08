@@ -94,4 +94,19 @@ describe("Form", () => {
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", interviewers[0]);
   });
+
+  it("submits the name entered by the user", () => {
+    const onSave = jest.fn();
+    const {getByText, getByPlaceholderText} = render(
+      <Form interviewer={interviewers[0]} interviewers={interviewers} onSave={onSave} />
+    );
+
+    const input = getByPlaceholderText("Enter Student Name");
+
+    fireEvent.change(input, {target: {value: "Lydia Miller-Jones"}});
+    fireEvent.click(getByText("Save"));
+
+    expect(onSave).toHaveBeenCalledTimes(1);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", interviewers[0]);
+  });
 });
