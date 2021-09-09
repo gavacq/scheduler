@@ -1,7 +1,7 @@
 # Interview Scheduler
 
 <img src="https://github.com/geecrypt/scheduler/blob/master/docs/show-desktop.png" alt="urls" width="800">
-<img src="https://github.com/geecrypt/scheduler/blob/master/docs/show-mobile.png" alt="urls" width="800">
+<img src="https://github.com/geecrypt/scheduler/blob/master/docs/show-mobile.png" alt="urls" width="400">
 <img src="https://github.com/geecrypt/scheduler/blob/master/docs/create-desktop.png" alt="urls" width="800">
 <img src="https://github.com/geecrypt/scheduler/blob/master/docs/validation-desktop.png" alt="login" width="800">
 <img src="https://github.com/geecrypt/scheduler/blob/master/docs/confirm-desktop.png" alt="404" width="800">
