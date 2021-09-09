@@ -11,7 +11,7 @@ export default function DayListItem(props) {
   // adding classes conditionally
   const dayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
-    "button--danger": props.spots === 0
+    "button--danger": props.spots === 0,
   });
 
   // FUNCTION: formatSpots 🍞
@@ -35,7 +35,9 @@ export default function DayListItem(props) {
       className={dayClass}
       // run setDay with the HTML name (day of the week) of the component we clicked on
       // setDay is defined in Application.js as a prop
-      onClick={() => props.setDay(props.name)}>
+      onClick={() => props.setDay(props.name)}
+      data-testid="day"
+    >
 
       <h2 className="text--regular">{props.name}</h2>
       <h3 className="text--light">{formatSpots()}</h3>
