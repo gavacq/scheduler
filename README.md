@@ -1,4 +1,5 @@
 # Interview Scheduler
+An interview scheduler front-end app built with React. Features responsive UI and unit + E2E testing with Jest + Cypress. 
 
 <img src="https://github.com/geecrypt/scheduler/blob/master/docs/show-desktop.png" alt="urls" width="800">
 <img src="https://github.com/geecrypt/scheduler/blob/master/docs/show-mobile.png" alt="urls" width="400">
